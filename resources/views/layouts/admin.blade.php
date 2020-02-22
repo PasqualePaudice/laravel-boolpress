@@ -21,7 +21,7 @@
     <!-- Styles -->
 
 
-    
+
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -38,6 +38,7 @@
         #navbarDropdown:hover #logout{
             display: block;
         }
+        @yield('style')
     </style>
 
 

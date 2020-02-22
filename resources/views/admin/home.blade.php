@@ -6,8 +6,9 @@
         <div class="col-md-8">
             <div class="card ">
 
-                <div class="card-header">
+                <div class="card-header row">
                     TUTTI I POST
+                    
                 </div>
                 <div class="row  p-3">
                     <div class="col">
