@@ -21,7 +21,10 @@
             <label for="content">Example textarea</label>
             <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" >{{ $post->content}}</textarea>
        </div>
-
+       <div class="form-group">
+           <label for="image">Immagine</label>
+           <input type="file" id="image" name="image" class="form-control"  rows="8" required></input>
+       </div>
        <div class="form-group">
            <input class="btn btn-success" type="submit" value="Aggiorna">
        </div>

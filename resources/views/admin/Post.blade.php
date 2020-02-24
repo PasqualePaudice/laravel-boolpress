@@ -47,7 +47,13 @@
                            <li class="text-center col-4 list-inline-item">
                                <a href="{{ route('admin.posts.edit',['post' =>$post]) }} " class="btn btn-primary">Modifica</a>
                                <a href="{{ route('admin.posts.show',['post' =>$post]) }} " class="btn btn-warning">Visualizza</a>
-                               <a href="#" class=" btn btn-danger">Cancella</a>
+                               <form class="d-inline" action="{{ route('admin.posts.destroy', ['post'=>$post->id])}}" method="post">
+                                   @method('DELETE')
+                                   @csrf
+                                   <input class="btn btn-danger" type="submit" name="" value="Cancella">
+
+                               </form>
+
                            </li>
                         </div>
 

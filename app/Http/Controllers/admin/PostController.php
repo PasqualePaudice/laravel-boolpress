@@ -6,6 +6,9 @@ use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
+
 
 
 
@@ -42,8 +45,16 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $dati= $request->all();
+        $image= $dati['image'];
+        $image_path = Storage::put('uploads',$image);
+
+
+
+
         $post= new Post();
+        $post->image = $image_path;
         $post->fill($dati);
+
         $slug_originale= Str::slug($dati['title']);
         $slug = $slug_originale;
 
@@ -94,6 +105,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+
         $dati=$request->all();
         $post->update($dati);
         return redirect()->route('admin.posts.index');
@@ -106,8 +118,10 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        $post= Post::find($id);
+        $post->destroy($id);
+        return redirect()->route('admin.posts.index');
     }
 }

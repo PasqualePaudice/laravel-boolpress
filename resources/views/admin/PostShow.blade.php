@@ -11,7 +11,7 @@
 
     <h5>TESTO</h5>
     <p class="card-text">{{$post->content}}</p>
-
+    <img src="{{ asset("/storage/". $post->image) }}" alt="Immagine di copertina">
   </div>
   <div class="card-footer text-muted">
     creato il:   {{$post->created_at}}  <br>  ultima modifica:    {{$post->updated_at}}
