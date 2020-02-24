@@ -45,15 +45,18 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $dati= $request->all();
-        $image= $dati['image'];
-        $image_path = Storage::put('uploads',$image);
-
-
 
 
         $post= new Post();
-        $post->image = $image_path;
+
         $post->fill($dati);
+
+
+        if (!empty($dati['image'])) {
+            $image= $dati['image'];
+            $image_path = Storage::put('uploads',$image);
+            $post->image = $image_path;
+        }
 
         $slug_originale= Str::slug($dati['title']);
         $slug = $slug_originale;

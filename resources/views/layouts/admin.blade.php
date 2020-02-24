@@ -38,6 +38,9 @@
         #navbarDropdown:hover #logout{
             display: block;
         }
+        img{
+            max-width: 500px;
+        }
         @yield('style')
     </style>
 
