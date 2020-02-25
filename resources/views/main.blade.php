@@ -67,17 +67,27 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
-                    @auth
 
-                        <a class="btn btn-success" href="{{ route('home') }}">Home</a>
 
-                    @else
+
+
+                    @guest
+
+
                         <a href="{{ route('login') }}">Login</a>
 
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>
                         @endif
                         <a href="{{ route('contatti') }}">Contatti</a>
+                        <a href="{{ route('blog') }}">Blog</a>
+
+                    @endguest
+
+                    @auth
+                        <a href="{{ route('admin.home')}}">HOME</a>
+                        <a href="{{ route('contatti') }}">Contatti</a>
+                        <a href="{{ route('blog') }}">Blog</a>
                     @endauth
                 </div>
             @endif
