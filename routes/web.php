@@ -12,7 +12,9 @@
 */
 
 Route::get('/','HomeController@index')->name('homepage');
-
+Route::get('/contatti','ContattiController@index')->name('contatti');
+Route::post('/contatti/store','ContattiController@store')->name('contatti.store');
+Route::get('/grazie','ContattiController@grazie')->name('contatti.grazie');
 Auth::routes();
 
 
