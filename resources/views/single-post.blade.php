@@ -12,11 +12,11 @@
                     {{ $post->content }}
                 </div>
 
-                <p>Categoria: {{ $post->category->name }}</p>
-                {{-- @if(!empty($post->category))
-                    <p>Categoria: <a href="{{ route('blog.category', ['slug' => $post->category->slug]) }}">{{ $post->category->name }}</a></p>
+
+                @if(!empty($post->category))
+                    <p>Categoria: <a href="{{route('blog.category',['slug'=> $post->category->slug])}}">{{ $post->category->name }}</a></p>
                 @endif
-                @if(($post->tags)->isNotEmpty())
+                {{-- @if(($post->tags)->isNotEmpty())
                     <p>Tags:
                         @foreach ($post->tags as $tag)
                             <a href="{{ route('blog.tag', ['slug' => $tag->slug]) }}">{{ $tag->name }}</a>{{ $loop->last ? '' : ',' }}

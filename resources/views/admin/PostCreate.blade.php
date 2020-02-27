@@ -26,6 +26,19 @@
             <input type="file" id="image" name="image" class="form-control"  rows="8" required></input>
        </div>
 
+        <div class="form-group">
+
+            <select class="form-control" name="category_id">
+                <option value="">Seleziona Categoria</option>
+                @foreach ($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+
+                @endforeach
+            </select>
+       </div>
+
+
+
        <div class="form-group">
            <input class="btn btn-success" type="submit" value="Crea">
        </div>

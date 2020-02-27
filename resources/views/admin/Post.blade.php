@@ -18,13 +18,18 @@
 
                 <ul class="col-sm-12 list-inline">
                     <div class="row ">
-                        <li class="text-center col-2 list-inline-item">
+                        <li class="text-center col list-inline-item">
                             <h2>Id</h2>
                         </li>
-                        <li class="text-center col-2 list-inline-item">
+
+                        <li class="text-center col list-inline-item">
+                            <h2>Categoria</h2>
+                        </li>
+
+                        <li class="text-center col list-inline-item">
                            <h2>Titolo</h2>
                         </li>
-                        <li class="text-center col-3 list-inline-item">
+                        <li class="text-center col list-inline-item">
                             <h2>Autore</h2>
                         </li>
                         <li class="text-center col-4 list-inline-item">
@@ -35,13 +40,16 @@
 
                     @forelse ($posts as $post)
                         <div class="row p-3 border-bottom border-info">
-                            <li class="text-center col-2 list-inline-item">
+                            <li class="text-center col list-inline-item">
                                 {{$post->id}}
                             </li>
-                           <li class="text-center col-2 list-inline-item">
+                            <li class="text-center col list-inline-item">
+                                {{ $post->category ? $post->category->name : '-'}}
+                            </li>
+                           <li class="text-center col list-inline-item">
                                {{$post->title }}
                            </li>
-                           <li class="text-center col-3 list-inline-item">
+                           <li class="text-center col list-inline-item">
                                {{$post->author}}
                            </li>
                            <li class="text-center col-4 list-inline-item">

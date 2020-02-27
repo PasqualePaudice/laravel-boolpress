@@ -16,7 +16,7 @@ class PostController extends Controller
 
     public function show($slug) {
         $post = Post::where('slug', $slug)->first();
-        
+
         if(!empty($post)) {
 
             return view('single-post', ['post' => $post]);
