@@ -25,9 +25,26 @@
            <label for="image">Immagine</label>
            <input type="file" id="image" name="image" class="form-control"  rows="8" required></input>
        </div>
+
+       <p>Modifica i tag:</p>
+
+
+       @foreach ($tags as $tag)
+        <label for="tag_{{$tag->id}}">
+           <input id="tag_{{$tag->id}}" type="checkbox" name="tag_id[]" value="{{$tag->id}}"
+           {{ $post->tags->contains($tag) ? 'checked' : ''}}>
+           {{ $tag->name}}
+       </label>
+       @endforeach
+
+
+
+
        <div class="form-group">
            <input class="btn btn-success" type="submit" value="Aggiorna">
        </div>
+
+
 
 
 

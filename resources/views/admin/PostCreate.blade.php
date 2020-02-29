@@ -36,6 +36,20 @@
                 @endforeach
             </select>
        </div>
+       @if ($tags->count())
+
+
+           <p>Aggiungi i tag:</p>
+
+
+           @foreach ($tags as $tag)
+            <label for="tag_{{$tag->id}}">
+               <input id="tag_{{$tag->id}}" type="checkbox" name="tag_id[]" value="{{$tag->id}}">
+               {{ $tag->name}}
+           </label>
+           @endforeach
+
+       @endif
 
 
 

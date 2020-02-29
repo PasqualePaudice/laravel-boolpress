@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Post;
 use App\Category;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
@@ -24,7 +25,7 @@ class PostController extends Controller
     public function index()
     {
         $posts=Post::all();
-        
+
         return view('admin/Post',['posts'=> $posts]);
     }
 
@@ -36,7 +37,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.PostCreate',['categories'=> $categories]);
+        $tags = Tag::all();
+        return view('admin.PostCreate',['categories'=> $categories,'tags'=>$tags]);
     }
 
     /**
@@ -47,8 +49,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $dati= $request->all();
 
+        $dati= $request->all();
 
         $post= new Post();
 
@@ -75,7 +77,11 @@ class PostController extends Controller
 
         $post->slug= $slug;
 
+
+
         $post->save();
+
+        $post->tags()->sync($dati['tag_id']);
 
         return redirect()->route('admin.posts.index');
     }
@@ -99,7 +105,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin/PostEdit',['post'=>$post]);
+        $tags = Tag::all();
+        return view('admin/PostEdit',['post'=>$post , 'tags'=>$tags]);
     }
 
     /**
@@ -111,9 +118,30 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $request->validate([
+            'title' => 'required|max:255',
+            'author' => 'required|max:255',
+            'content' => 'required',
+            'image' => 'image'
+        ]);
 
         $dati=$request->all();
+
+        if (!empty($dati['image'])) {
+
+            if (!empty($post->image)) {
+                Storage::delete($post->image);
+            }
+
+            $image = $dati['image'];
+            $image_path = Storage::put('uploads',$image);
+            $dati['image'] = $image_path;
+        }
+
         $post->update($dati);
+        if(!empty($dati['tag_id'])) {
+        $post->tags()->sync($dati['tag_id']);
+    }
         return redirect()->route('admin.posts.index');
 
     }
@@ -127,7 +155,16 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post= Post::find($id);
-        $post->destroy($id);
+        if (!empty($post->image)) {
+            Storage::delete($post->image);
+        }
+
+
+        if ($post->tags->isNotEmpty()) {
+            $post->tags()->sync([]);
+        }
+
+        $post->delete($id);
         return redirect()->route('admin.posts.index');
     }
 }

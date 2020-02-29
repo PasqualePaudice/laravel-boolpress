@@ -11,6 +11,16 @@
   <div class="card-body">
     <h5 class="card-title">ID: {{$post->id}} </h5>
     <h5 class="card-title">Categoria: {{ $post->category ? $post->category->name : '-'}}</h5>
+    @if (($post->tags)->isNotEmpty())
+
+
+    <h5 class="card-title">Tag:</h5>
+    <ul>
+        @foreach ($post->tags as $tag)
+            <li>{{ $tag->name }}</li>
+        @endforeach
+    </ul>
+    @endif
 
     <h5>TESTO</h5>
     <p class="card-text">{{$post->content}}</p>
